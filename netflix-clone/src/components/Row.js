@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { getMovies } from '../api';
+import "./Row.css";
+
+const imageHost = "https://image.tmdb.org/t/p/original/";
 
 export default function Row({ title, path}) {
 const [movies, setMovies] = React.useState([]);
@@ -19,6 +22,16 @@ useEffect(() => {
 }, [path]);
 
   return (
-    <div>Row</div>
+    <div className="row-container">
+      <h2 className="row-header">{title}</h2>
+      <div className="row-cards">
+        {movies?.map((movie) => {
+          return (
+            <img className="movie-card" key={movie.id} src={`${imageHost}${movie.poster_path}`} alt={movie.name}>
+            </img>
+          );
+        })}
+      </div>
+    </div>
   )
 }
