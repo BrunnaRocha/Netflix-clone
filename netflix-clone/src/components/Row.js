@@ -4,7 +4,7 @@ import "./Row.css";
 
 const imageHost = "https://image.tmdb.org/t/p/original/";
 
-export default function Row({ title, path}) {
+export default function Row({ title, path, isLarge }) {
 const [movies, setMovies] = React.useState([]);
 
 const fetchMovies = async (_path) => {
@@ -27,8 +27,11 @@ useEffect(() => {
       <div className="row-cards">
         {movies?.map((movie) => {
           return (
-            <img className="movie-card" key={movie.id} src={`${imageHost}${movie.poster_path}`} alt={movie.name}>
-            </img>
+            <img 
+              className={`movie-card ${isLarge && "movie-card-large"}`}
+              key={movie.id} 
+              src={`${imageHost}${movie.poster_path}`} alt={movie.name}
+            ></img>
           );
         })}
       </div>
